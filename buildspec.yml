@@ -9,8 +9,17 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      # Removed `npm test` to avoid failure due to missing test script
+      # Add any build commands here, e.g., npm run build
 
   post_build:
     commands:
       - echo Build completed on `date`
+
+artifacts:
+  files:
+    - appspec.yml
+    - scripts/**/*
+    - app.js
+    - package.json
+    # Add any other files or directories needed for deployment
+  discard-paths: no
