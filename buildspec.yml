@@ -9,11 +9,14 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      # Add any build commands here, e.g., npm run build
+      # If you have a build script, uncomment the next line
+      # - npm run build
 
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Starting the application
+      - pm2 start app.js --name my-app || node app.js  # Fallback if PM2 isn't available
 
 artifacts:
   files:
@@ -21,5 +24,5 @@ artifacts:
     - scripts/**/*
     - app.js
     - package.json
-    # Add any other files or directories needed for deployment
+    - package-lock.json  # Add this to ensure consistent installs
   discard-paths: no
