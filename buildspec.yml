@@ -5,18 +5,18 @@ phases:
     commands:
       - echo Installing Node.js
       - npm install
+      - echo Installing PM2
+      - npm install -g pm2  # Install PM2 globally
 
   build:
     commands:
       - echo Build started on `date`
-      # If you have a build script, uncomment the next line
-      # - npm run build
+      - echo Starting the application with PM2
+      - pm2 start app.js --name my-app || node app.js  # Start using PM2
 
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Starting the application
-      - pm2 start app.js --name my-app || node app.js  # Fallback if PM2 isn't available
 
 artifacts:
   files:
@@ -24,5 +24,5 @@ artifacts:
     - scripts/**/*
     - app.js
     - package.json
-    - package-lock.json  # Add this to ensure consistent installs
+    - package-lock.json
   discard-paths: no
